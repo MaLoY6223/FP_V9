@@ -1,0 +1,153 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    background: #2B2B2B;
+    user-select: none;
+}
+
+.function-container
+{
+    width: 100vh;
+    height: 100vh;
+    background: #444444;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.foot
+{
+    min-height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+hr
+{
+    border: none;
+    height: 1px;
+    background: #999999;
+}
+
+.mid
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    gap: 15px;
+}
+
+.item
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 100px;
+}
+
+.circle
+{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.foot .item .circle
+{
+    background: rgb(255, 255, 50);
+}
+
+.mid .item .circle
+{
+    background: rgb(80, 255, 80);
+}
+
+.circle-icon
+{
+    width: 25px;
+    height: 25px;
+}
+
+.circle-name
+{
+    font-size: 15px;
+    color: white;
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+    max-width: 80px;
+    text-align: center;
+}
+
+.circle-value
+{
+    font-size: 15px;
+    color: white;
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+
+
+.transfer-backdrop
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.transfer-modal
+{
+    background: #444444;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 260px;
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+
+.transfer-modal h3
+{
+    text-align: center;
+}
+
+.transfer-modal input
+{
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.transfer-modal button
+{
+    padding: 8px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #666666;
+    color: white;
+}
