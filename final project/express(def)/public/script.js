@@ -172,9 +172,6 @@ function askAmount(title, defaultValue)
         backdrop.append(modal)
         document.body.append(backdrop)
 
-        input.focus()
-        input.select()
-
         input.addEventListener('keydown', function (e) 
         {
             if (e.key === 'Enter') okBtn.click()
@@ -274,63 +271,42 @@ function createItem(data)
         depositFunds(item)
     })
 
-    circle.addEventListener('pointerdown', function (e) {
-        startDrag(e, item)
-    })
-
-    return item
-}
 
 /* ============================================================
    DRAG & DROP
    ============================================================ */
 
-let drag = null 
+    let isDrag = null;
+    let offsetX;/*Смещение курсора относительно элемента по X*/
+    let offsetY;/*Смещение курсора относительно элемента по Y*/
 
-function startDrag(e, item) 
-{
-    if (drag) return
-    drag = { from: item, to: null }
-    document.addEventListener('pointerup', onDragEnd)
-    document.addEventListener('pointermove', onDragMove)
-}
+    const Pleft = getComputedStyle(circle).left
+    const Ptop = getComputedStyle(circle).top
 
-function onDragMove(e) 
-{
-    if (!drag) return
-
-    const el = document.elementFromPoint(e.clientX, e.clientY)
-    let target = el ? el.closest('.item') : null
-
-    if (target === drag.from) target = null
-
-    if (drag.to && drag.to !== target) 
+    circle.addEventListener("mousedown", function(e)
     {
-        drag.to.classList.remove('drop-target')
-    }
+    isDrag = true;
+    circle.style.position = 'fixed'
+    offsetX = e.pageX - parseInt(getComputedStyle(circle).left);
+    offsetY = e.pageY - parseInt(getComputedStyle(circle).top);  
+    })/*Вешаем обработчик прямо на элемент*/
 
-    drag.to = target
-
-    if (target) 
+    document.addEventListener("mouseup", function(){ isDrag = false;
+        circle.style.left = Pleft;
+        circle.style.top = Ptop;
+        circle.style.position = 'static'
+    }) 
+    document.addEventListener("mousemove",/*Оставшиеся обработчики вешаем на сам документ*/
+    function(e) 
     {
-        target.classList.add('drop-target')
-    }
-}
+        if (isDrag) 
+        { 
+            circle.style.left = `calc(${e.pageX}px - ${offsetX}px)`;
+            circle.style.top = `calc(${e.pageY}px - ${offsetY}px)`;
+        }
+    }) 
 
-function onDragEnd() 
-{
-    if (!drag) return
-
-    document.removeEventListener('pointerup', onDragEnd)
-    document.removeEventListener('pointermove', onDragMove)
-
-    const from = drag.from
-    const to = drag.to
-
-    if (to) to.classList.remove('drop-target')
-    drag = null
-
-    if (from && to) transferFunds(from, to)
+    return item
 }
 
 /* ============================================================
@@ -354,3 +330,9 @@ function onDragEnd()
 
     container.append(foot, hr, mid)
     document.body.append(container)
+
+
+
+   
+        
+ 
